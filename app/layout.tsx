@@ -13,19 +13,19 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'FicusSoft | Tomorrow doesn’t wait. Neither do we.',
-  description: 'Silicon Valley product engineering, applied AI, computer vision, and embedded systems. Great ideas brought to life in weeks, not years.',
+  title: 'FicusSoft — Ideas engineered into impact',
+  description: 'An independent Silicon Valley engineering partner for AI, digital products, computer vision, cloud platforms, and connected systems.',
   icons: { icon: 'https://www.ficussoft.com/images/logo.png' },
   openGraph: {
-    title: 'FicusSoft | Tomorrow doesn’t wait. Neither do we.',
-    description: 'Silicon Valley product engineering, applied AI, and embedded intelligence.',
+    title: 'FicusSoft — Ideas engineered into impact',
+    description: 'Independent engineering for AI, digital products, and the connected world.',
     images: ['https://www.ficussoft.com/images/logo.png'],
     type: 'website',
   },
   twitter: {
     card: 'summary',
-    title: 'FicusSoft | Tomorrow doesn’t wait. Neither do we.',
-    description: 'Product engineering, applied AI, and embedded intelligence.',
+    title: 'FicusSoft — Ideas engineered into impact',
+    description: 'Independent engineering for AI, digital products, and the connected world.',
     images: ['https://www.ficussoft.com/images/logo.png'],
   },
 };

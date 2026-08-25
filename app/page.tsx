@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import PremiumExperience from './PremiumExperience';
 
 const capabilities = [
   { id: '01', short: 'Product engineering', title: 'From first sketch to a product that ships.', description: 'A dedicated engineering team that joins yours. We shape the product, build the prototype, and stay close through launch and everything after.', tags: ['Proof of concept', 'Full-stack development', 'Cloud architecture', 'Product modernization'], signal: 'BUILD STATUS', reading: 'Production ready', visual: 'product' },
@@ -33,7 +34,7 @@ function SignalCard({ visual, signal, reading }: { visual: string; signal: strin
   </div>;
 }
 
-export default function Home() {
+function PreviousFicusSoftExperience() {
   const [activeCapability, setActiveCapability] = useState(0);
   const [activeStage, setActiveStage] = useState(1);
   const [challenge, setChallenge] = useState('Build a new product');
@@ -69,4 +70,14 @@ export default function Home() {
 
     <footer className="footer"><div><Brand/><p>Great ideas, brought to life with technology.<br/>In weeks, not years.</p></div><div className="footer-links"><a href="#services">Capabilities</a><a href="#work">Our work</a><a href="#about">About</a><a href="tel:+15105791838">+1 (510) 579-1838</a></div><div className="footer-base"><span>© {new Date().getFullYear()} FicusSoft. Built on trust.</span><a href="#home">BACK TO TOP ↑</a></div></footer>
   </main>;
+}
+
+export default function Home() {
+  const experiences = {
+    premium: PremiumExperience,
+    classic: PreviousFicusSoftExperience,
+  };
+  const SelectedExperience = experiences.premium;
+
+  return <SelectedExperience />;
 }
