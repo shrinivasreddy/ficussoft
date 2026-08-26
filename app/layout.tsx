@@ -15,7 +15,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: 'FicusSoft — Ideas engineered into impact',
   description: 'An independent Silicon Valley engineering partner for AI, digital products, computer vision, cloud platforms, and connected systems.',
-  icons: { icon: 'https://www.ficussoft.com/images/logo.png' },
+  icons: {
+    icon: [{ url: '/favicon.png', type: 'image/png', sizes: '512x512' }],
+    shortcut: '/favicon.png',
+    apple: '/favicon.png',
+  },
   openGraph: {
     title: 'FicusSoft — Ideas engineered into impact',
     description: 'Independent engineering for AI, digital products, and the connected world.',
