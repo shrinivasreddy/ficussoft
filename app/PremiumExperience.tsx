@@ -51,6 +51,14 @@ const notes = [
   { tag: 'ENGINEERING', title: 'From sensor noise to decisions worth acting on.', time: '8 min read', color: '#ffdfc9' },
 ];
 
+const clients = ['Visa', 'HP', 'Hitachi', 'SAP', 'Verizon', 'Marubeni', 'Microsoft', 'Mitsubishi', 'Kodak', 'Avalon'];
+
+const testimonials = [
+  { quote: 'FicusSoft worked as an extension of our team, translating an early idea into a product we could confidently move forward with.', role: 'Product leader', company: 'Client name pending approval', accent: '#dfd4f1' },
+  { quote: 'The team stayed close to our goals, made the technical decisions understandable, and kept the work moving with real ownership.', role: 'Technology executive', company: 'Client name pending approval', accent: '#d8eeff' },
+  { quote: 'Their combination of product thinking and engineering depth helped us solve a difficult problem without losing sight of the business outcome.', role: 'Engineering leader', company: 'Client name pending approval', accent: '#ffdfc9' },
+];
+
 function FicusLogo({ inverted = false }: { inverted?: boolean }) {
   return <a className={`px-logo ${inverted ? 'px-logo-inverted' : ''}`} href="#home" aria-label="FicusSoft home"><span className="px-logo-symbol">f</span><span>ficus<strong>soft</strong></span></a>;
 }
@@ -64,6 +72,8 @@ export default function PremiumExperience() {
   const [activeLab, setActiveLab] = useState(0);
   const [activeStory, setActiveStory] = useState(0);
   const [stackCategory, setStackCategory] = useState('AI & machine learning');
+  const [activeClient, setActiveClient] = useState(0);
+  const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scroll, setScroll] = useState(0);
   const [pointer, setPointer] = useState({ x: 52, y: 43 });
@@ -83,6 +93,7 @@ export default function PremiumExperience() {
   const service = services[activeService];
   const mode = labModes[activeLab];
   const story = stories[activeStory];
+  const testimonial = testimonials[activeTestimonial];
 
   return <div className="premium-site">
     <div className="px-progress" style={{ transform: `scaleX(${scroll})` }} />
@@ -103,7 +114,11 @@ export default function PremiumExperience() {
 
     <section className="px-collaboration"><div className="px-collab-image" style={{ backgroundImage: `url(${IMG.people})` }}/><div className="px-collab-copy"><span className="px-index">THE FICUSSOFT WAY</span><h2>Guided by your goals.<br/>Built as one team.</h2><p>Much of FicusSoft’s success comes from the contribution and guidance of champions inside client organizations. They set the goals; FicusSoft works as an extension of their teams to achieve the objective.</p><a href="#contact">Meet your future team <Arrow/></a></div></section>
 
-    <section id="industries" className="px-industries px-wrap"><div className="px-section-top"><div><span className="px-index">04 / WHO WE HELP</span><h2>Every industry has<br/>a next chapter.</h2></div><p>Semiconductor experience is confirmed by FicusSoft. The remaining sectors are suggested placeholders to confirm with the team.</p></div><div className="px-industry-grid">{sectors.map(item => <a key={item.name} href="#contact" className="px-industry"><span>{item.icon}</span><h3>{item.name}</h3><p>{item.detail}</p><Arrow/></a>)}</div></section>
+    <section className="px-clients px-wrap" aria-labelledby="clients-heading"><div className="px-section-top"><div><span className="px-index">04 / OUR CLIENTS</span><h2 id="clients-heading">Trusted names.<br/>Shared ambition.</h2></div><p>These organizations appear in the client section of FicusSoft’s current website. Select a name to explore the showcase.</p></div><div className="px-client-explorer"><div className="px-client-grid" aria-label="FicusSoft clients">{clients.map((client,index) => <button key={client} className={activeClient === index ? 'active' : ''} onClick={() => setActiveClient(index)} aria-pressed={activeClient === index}><span>{client}</span><i>0{index + 1}</i></button>)}</div><aside className="px-client-focus"><span>SELECTED CLIENT / {String(activeClient + 1).padStart(2, '0')}</span><strong key={clients[activeClient]}>{clients[activeClient]}</strong><p>Listed by FicusSoft as a client. Engagement details and an approved project summary can be added here.</p><a href="#contact">Discuss a similar challenge <Arrow/></a></aside></div></section>
+
+    <section className="px-testimonials" aria-labelledby="testimonials-heading"><div className="px-wrap"><div className="px-testimonial-head"><div><span className="px-index">05 / CLIENT VOICES</span><h2 id="testimonials-heading">Partnership,<br/>in their words.</h2></div><span className="px-placeholder-badge">PLACEHOLDER QUOTES · APPROVAL REQUIRED</span></div><article className="px-quote-card" style={{ '--quote-accent': testimonial.accent } as React.CSSProperties}><div className="px-quote-mark">“</div><blockquote key={activeTestimonial}>{testimonial.quote}</blockquote><footer><div><strong>{testimonial.company}</strong><span>{testimonial.role}</span></div><div className="px-quote-count">0{activeTestimonial + 1} <i/> 0{testimonials.length}</div></footer></article><div className="px-testimonial-controls"><div>{testimonials.map((item,index) => <button key={item.role} className={activeTestimonial === index ? 'active' : ''} onClick={() => setActiveTestimonial(index)} aria-label={`Show testimonial ${index + 1}`} aria-current={activeTestimonial === index}><span>0{index + 1}</span>{item.role}</button>)}</div><div><button onClick={() => setActiveTestimonial((activeTestimonial + testimonials.length - 1) % testimonials.length)} aria-label="Previous testimonial">←</button><button onClick={() => setActiveTestimonial((activeTestimonial + 1) % testimonials.length)} aria-label="Next testimonial">→</button></div></div></div></section>
+
+    <section id="industries" className="px-industries px-wrap"><div className="px-section-top"><div><span className="px-index">06 / WHO WE HELP</span><h2>Every industry has<br/>a next chapter.</h2></div><p>Semiconductor experience is confirmed by FicusSoft. The remaining sectors are suggested placeholders to confirm with the team.</p></div><div className="px-industry-grid">{sectors.map(item => <a key={item.name} href="#contact" className="px-industry"><span>{item.icon}</span><h3>{item.name}</h3><p>{item.detail}</p><Arrow/></a>)}</div></section>
 
     <section className="px-stack"><div className="px-wrap"><div className="px-section-top"><div><span className="px-index">05 / TOOLS WITH PURPOSE</span><h2>Right tools.<br/>Real thinking.</h2></div><p>Technology choices should follow the problem, not the other way around.</p></div><div className="px-stack-tabs" role="tablist" aria-label="Technology categories">{Object.keys(stack).map(category => <button key={category} role="tab" aria-selected={stackCategory === category} className={stackCategory === category ? 'active' : ''} onClick={() => setStackCategory(category)}>{category}</button>)}</div><div className="px-stack-list" role="tabpanel">{stack[stackCategory].map((tool,index) => <div key={tool}><span>0{index + 1}</span><strong>{tool}</strong><Arrow/></div>)}</div><p className="px-stack-note">Illustrative technology categories. Confirm the active FicusSoft technology stack before publication.</p></div></section>
 
