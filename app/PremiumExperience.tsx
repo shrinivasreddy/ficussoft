@@ -51,7 +51,18 @@ const notes = [
   { tag: 'ENGINEERING', title: 'From sensor noise to decisions worth acting on.', time: '8 min read', color: '#ffdfc9' },
 ];
 
-const clients = ['Visa', 'HP', 'Hitachi', 'SAP', 'Verizon', 'Marubeni', 'Microsoft', 'Mitsubishi', 'Kodak', 'Avalon'];
+const clients = [
+  { name: 'Visa', field: 'Payments & platforms', signal: 'Products designed for trust at scale', accent: '#d8eeff' },
+  { name: 'HP', field: 'Technology & devices', signal: 'Engineering that connects product and experience', accent: '#dfd4f1' },
+  { name: 'Hitachi', field: 'Industrial technology', signal: 'Complex systems made useful in the real world', accent: '#cfe9d7' },
+  { name: 'SAP', field: 'Enterprise software', signal: 'Modern foundations for ambitious operations', accent: '#ffe1bd' },
+  { name: 'Verizon', field: 'Connectivity', signal: 'Reliable experiences across connected ecosystems', accent: '#ffd8d2' },
+  { name: 'Marubeni', field: 'Global enterprise', signal: 'Technology shaped around business momentum', accent: '#e9dfca' },
+  { name: 'Microsoft', field: 'Cloud & platforms', signal: 'Ideas moved from possibility to product', accent: '#d6e8ff' },
+  { name: 'Mitsubishi', field: 'Industry & mobility', signal: 'Intelligence built into physical operations', accent: '#e1dcf7' },
+  { name: 'Kodak', field: 'Imaging technology', signal: 'Digital products grounded in visual expertise', accent: '#ffe4a8' },
+  { name: 'Avalon', field: 'Product innovation', signal: 'Focused teams turning concepts into outcomes', accent: '#d9efdf' },
+];
 
 const testimonials = [
   { quote: 'FicusSoft worked as an extension of our team, translating an early idea into a product we could confidently move forward with.', role: 'Product leader', company: 'Client name pending approval', accent: '#dfd4f1' },
@@ -93,6 +104,7 @@ export default function PremiumExperience() {
   const service = services[activeService];
   const mode = labModes[activeLab];
   const story = stories[activeStory];
+  const client = clients[activeClient];
   const testimonial = testimonials[activeTestimonial];
 
   return <div className="premium-site">
@@ -114,7 +126,7 @@ export default function PremiumExperience() {
 
     <section className="px-collaboration"><div className="px-collab-image" style={{ backgroundImage: `url(${IMG.people})` }}/><div className="px-collab-copy"><span className="px-index">THE FICUSSOFT WAY</span><h2>Guided by your goals.<br/>Built as one team.</h2><p>Much of FicusSoft’s success comes from the contribution and guidance of champions inside client organizations. They set the goals; FicusSoft works as an extension of their teams to achieve the objective.</p><a href="#contact">Meet your future team <Arrow/></a></div></section>
 
-    <section className="px-clients px-wrap" aria-labelledby="clients-heading"><div className="px-section-top"><div><span className="px-index">04 / OUR CLIENTS</span><h2 id="clients-heading">Trusted names.<br/>Shared ambition.</h2></div><p>These organizations appear in the client section of FicusSoft’s current website. Select a name to explore the showcase.</p></div><div className="px-client-explorer"><div className="px-client-grid" aria-label="FicusSoft clients">{clients.map((client,index) => <button key={client} className={activeClient === index ? 'active' : ''} onClick={() => setActiveClient(index)} aria-pressed={activeClient === index}><span>{client}</span><i>0{index + 1}</i></button>)}</div><aside className="px-client-focus"><span>SELECTED CLIENT / {String(activeClient + 1).padStart(2, '0')}</span><strong key={clients[activeClient]}>{clients[activeClient]}</strong><p>Listed by FicusSoft as a client. Engagement details and an approved project summary can be added here.</p><a href="#contact">Discuss a similar challenge <Arrow/></a></aside></div></section>
+    <section className="px-clients" aria-labelledby="clients-heading"><div className="px-wrap"><div className="px-section-top"><div><span className="px-index">04 / OUR CLIENTS</span><h2 id="clients-heading">Trusted names.<br/>Shared ambition.</h2></div><p>Explore a selection of organizations FicusSoft has worked with across products, platforms, and intelligent systems.</p></div><div className="px-client-stage" style={{ '--client-accent': client.accent } as React.CSSProperties}><div className="px-client-ghost" aria-hidden="true">{client.name}</div><div className="px-client-count"><span>{String(activeClient + 1).padStart(2, '0')}</span><i/><span>{String(clients.length).padStart(2, '0')}</span></div><article className="px-client-focus" key={client.name}><span>{client.field}</span><h3>{client.name}</h3><p>{client.signal}.</p><small>Featured in FicusSoft’s client portfolio. Approved engagement details can be added here.</small><a href="#contact">Start a similar conversation <Arrow/></a></article><div className="px-client-nav"><button aria-label="Previous client" onClick={() => setActiveClient((activeClient + clients.length - 1) % clients.length)}>←</button><button aria-label="Next client" onClick={() => setActiveClient((activeClient + 1) % clients.length)}>→</button></div></div><div className="px-client-rail" role="tablist" aria-label="FicusSoft clients">{clients.map((item,index) => <button key={item.name} role="tab" aria-selected={activeClient === index} className={activeClient === index ? 'active' : ''} onMouseEnter={() => setActiveClient(index)} onFocus={() => setActiveClient(index)} onClick={() => setActiveClient(index)}><i>{String(index + 1).padStart(2, '0')}</i><span>{item.name}</span><b/></button>)}</div></div></section>
 
     <section className="px-testimonials" aria-labelledby="testimonials-heading"><div className="px-wrap"><div className="px-testimonial-head"><div><span className="px-index">05 / CLIENT VOICES</span><h2 id="testimonials-heading">Partnership,<br/>in their words.</h2></div><span className="px-placeholder-badge">PLACEHOLDER QUOTES · APPROVAL REQUIRED</span></div><article className="px-quote-card" style={{ '--quote-accent': testimonial.accent } as React.CSSProperties}><div className="px-quote-mark">“</div><blockquote key={activeTestimonial}>{testimonial.quote}</blockquote><footer><div><strong>{testimonial.company}</strong><span>{testimonial.role}</span></div><div className="px-quote-count">0{activeTestimonial + 1} <i/> 0{testimonials.length}</div></footer></article><div className="px-testimonial-controls"><div>{testimonials.map((item,index) => <button key={item.role} className={activeTestimonial === index ? 'active' : ''} onClick={() => setActiveTestimonial(index)} aria-label={`Show testimonial ${index + 1}`} aria-current={activeTestimonial === index}><span>0{index + 1}</span>{item.role}</button>)}</div><div><button onClick={() => setActiveTestimonial((activeTestimonial + testimonials.length - 1) % testimonials.length)} aria-label="Previous testimonial">←</button><button onClick={() => setActiveTestimonial((activeTestimonial + 1) % testimonials.length)} aria-label="Next testimonial">→</button></div></div></div></section>
 
