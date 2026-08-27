@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+import ConsentBanner from './ConsentBanner';
 import './globals.css';
 
 const geistSans = Geist({
@@ -12,7 +13,10 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
+const productionOrigin = new URL('https://ficussoft-product-engineering.p-shrinivas-reddy.chatgpt.site');
+
 export const metadata: Metadata = {
+  metadataBase: productionOrigin,
   title: 'FicusSoft — Ideas engineered into impact',
   description: 'An independent Silicon Valley engineering partner for AI, digital products, computer vision, cloud platforms, and connected systems.',
   icons: {
@@ -23,14 +27,15 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'FicusSoft — Ideas engineered into impact',
     description: 'Independent engineering for AI, digital products, and the connected world.',
-    images: ['https://www.ficussoft.com/images/logo.png'],
+    images: [{ url: '/hero-ficussoft-v2.png', width: 1536, height: 1024, alt: 'FicusSoft engineering ideas into impact' }],
     type: 'website',
   },
+  robots: { index: true, follow: true },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: 'FicusSoft — Ideas engineered into impact',
     description: 'Independent engineering for AI, digital products, and the connected world.',
-    images: ['https://www.ficussoft.com/images/logo.png'],
+    images: ['/hero-ficussoft-v2.png'],
   },
 };
 
@@ -45,6 +50,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        <ConsentBanner />
       </body>
     </html>
   );
