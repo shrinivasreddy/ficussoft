@@ -6,11 +6,11 @@ const contentSecurityPolicy = [
   "form-action 'self' mailto:",
   "frame-ancestors 'none'",
   "object-src 'none'",
-  "script-src 'self' 'unsafe-inline' https://www.clarity.ms",
+  "script-src 'self' 'unsafe-inline'",
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob: https://images.unsplash.com https://*.clarity.ms https://*.bing.com",
+  "img-src 'self' data: blob: https://images.unsplash.com",
   "font-src 'self' data:",
-  "connect-src 'self' https://*.clarity.ms https://*.microsoft.com https://*.bing.com",
+  "connect-src 'self'",
   "upgrade-insecure-requests",
 ].join('; ');
 
