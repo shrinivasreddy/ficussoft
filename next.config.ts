@@ -11,6 +11,9 @@ const contentSecurityPolicy = [
   "img-src 'self' data: blob: https://images.unsplash.com",
   "font-src 'self' data:",
   "connect-src 'self'",
+  "media-src 'none'",
+  "manifest-src 'self'",
+  "worker-src 'self' blob:",
   "upgrade-insecure-requests",
 ].join('; ');
 
@@ -22,6 +25,7 @@ const securityHeaders = [
   { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(), payment=(), usb=()' },
   { key: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
   { key: 'Cross-Origin-Resource-Policy', value: 'same-site' },
+  { key: 'Strict-Transport-Security', value: 'max-age=31536000' },
 ];
 
 const nextConfig: NextConfig = {

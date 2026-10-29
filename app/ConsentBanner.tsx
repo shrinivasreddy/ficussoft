@@ -4,10 +4,13 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 const CONSENT_COOKIE = 'ficussoft_cookie_consent';
+const SECURE_CONSENT_COOKIE = '__Host-ficussoft_cookie_consent';
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
 
 function hasConsentCookie() {
-  return document.cookie.split('; ').some((cookie) => cookie.startsWith(`${CONSENT_COOKIE}=accepted`));
+  return document.cookie.split('; ').some((cookie) =>
+    cookie === `${SECURE_CONSENT_COOKIE}=accepted` || cookie === `${CONSENT_COOKIE}=accepted`,
+  );
 }
 
 export default function ConsentBanner() {
@@ -20,8 +23,10 @@ export default function ConsentBanner() {
   }, []);
 
   function acceptCookies() {
-    const secure = window.location.protocol === 'https:' ? '; Secure' : '';
-    document.cookie = `${CONSENT_COOKIE}=accepted; Max-Age=${COOKIE_MAX_AGE}; Path=/; SameSite=Lax${secure}`;
+    const isSecure = window.location.protocol === 'https:';
+    const cookieName = isSecure ? SECURE_CONSENT_COOKIE : CONSENT_COOKIE;
+    const secure = isSecure ? '; Secure' : '';
+    document.cookie = `${cookieName}=accepted; Max-Age=${COOKIE_MAX_AGE}; Path=/; SameSite=Strict; Priority=High${secure}`;
     setVisible(false);
   }
 
